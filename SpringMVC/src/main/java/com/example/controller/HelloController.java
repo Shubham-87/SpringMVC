@@ -2,9 +2,12 @@ package com.example.controller;
 
 import java.net.http.HttpResponse;
 
+import javax.validation.Valid;
+
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,8 +24,16 @@ public class HelloController {
 		return "userform";
 	}
 	@RequestMapping(value = "/showdata",method = RequestMethod.POST)
-	public String showdata(@ModelAttribute("user") User user, Model model) {
-		model.addAttribute("user", user);
+	public String showdata( @ModelAttribute("user") @Valid User user, BindingResult bindingResult, Model model) {
+		
+		if(bindingResult.hasErrors()) {
+			System.out.println("error");
+			return "userform";
+		}else {
+			model.addAttribute("user", user);
 			return "userdata";
+			
 		}
+		
+	}
 }

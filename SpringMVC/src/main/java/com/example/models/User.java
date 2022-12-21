@@ -1,10 +1,18 @@
 package com.example.models;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+
+import org.springframework.lang.NonNull;
+
 public class User {
 
 	private int id;
+	@NotEmpty(message = "Name can not be empty")
 	private String name;
+	@Email(message = "Email should be well formatted")
 	private String email;
+	@NonNull
 	private String password;
 	private String confirm_password;
 
