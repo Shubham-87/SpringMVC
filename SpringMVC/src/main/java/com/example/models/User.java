@@ -1,10 +1,17 @@
 package com.example.models;
 
-public class User {
+import javax.persistence.*;
 
+@Entity
+public class User {
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private int id;
+	@Column
 	private String name;
+	@Column
 	private String email;
+	@Column
 	private String password;
 	private String confirm_password;
 
